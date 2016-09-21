@@ -104,3 +104,38 @@ $di->setShared('session', function () {
 
     return $session;
 });
+
+/**
+ * This part will check if the page exists and refers you to the 404 error.
+ */
+use \Phalcon\Mvc\Dispatcher as PhDispatcher;
+
+$di->set(
+    'dispatcher',
+    function() use ($di) {
+
+        $evManager = $di->getShared('eventsManager');
+
+        $evManager->attach(
+            "dispatch:beforeException",
+            function($event, $dispatcher, $exception)
+            {
+                switch ($exception->getCode()) {
+                    case PhDispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                    case PhDispatcher::EXCEPTION_ACTION_NOT_FOUND:
+                        $dispatcher->forward(
+                            array(
+                                'controller' => 'error',
+                                'action'     => 'show404',
+                            )
+                        );
+                        return false;
+                }
+            }
+        );
+        $dispatcher = new PhDispatcher();
+        $dispatcher->setEventsManager($evManager);
+        return $dispatcher;
+    },
+    true
+);
