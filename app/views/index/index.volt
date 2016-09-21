@@ -1,7 +1,7 @@
 <div class="page-header">
-    <h1>Congratulations!</h1>
+    <h1>Aserius!</h1>
 </div>
 
-<p>You're now flying with Phalcon. Great things are about to happen!</p>
+<p>Welcome to the new project of Aserius. Below you can register now</p>
 
-<p>This page is located at <code>views/index/index.volt</code></p>
+<button type="button" class="btn btn-primary">Register</button>
