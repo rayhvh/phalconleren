@@ -2,7 +2,7 @@
     <div class="sub-content">
         <br />
         <br />
-          <img src="http://www.freeiconspng.com/uploads/error-icon-28.png" alt="error">
+          <img src="http://www.freeiconspng.com/uploads/error-icon-28.png" alt="error" style="width:40%;height:40%;">
         <br />
         <br />
         <strong>ERROR 404</strong>

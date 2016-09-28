@@ -87,8 +87,9 @@ class UsersController extends ControllerBase
 
             $this->tag->setDefault("id", $user->id);
             $this->tag->setDefault("username", $user->username);
-            $this->tag->setDefault("password", $user->password);
             $this->tag->setDefault("email", $user->email);
+            $this->tag->setDefault("password", $user->password);
+            $this->tag->setDefault("rank", $user->rank);
             
         }
     }
@@ -109,8 +110,9 @@ class UsersController extends ControllerBase
 
         $user = new Users();
         $user->username = $this->request->getPost("username");
-        $user->password = $this->request->getPost("password");
         $user->email = $this->request->getPost("email", "email");
+        $user->password = $this->request->getPost("password");
+        $user->rank = $this->request->getPost("rank");
         
 
         if (!$user->save()) {
@@ -165,8 +167,9 @@ class UsersController extends ControllerBase
         }
 
         $user->username = $this->request->getPost("username");
-        $user->password = $this->request->getPost("password");
         $user->email = $this->request->getPost("email", "email");
+        $user->password = $this->request->getPost("password");
+        $user->rank = $this->request->getPost("rank");
         
 
         if (!$user->save()) {

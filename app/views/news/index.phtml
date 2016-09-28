@@ -1,0 +1,34 @@
+<div class="page-header">
+	<h1>
+		News
+	</h1>
+<!--	Create if statement that only shows when logged in and admin+-->
+	<p>
+		<?php echo $this->tag->linkTo(["news/new", "Create new post"]) ?>
+	</p>
+</div>
+
+<?php foreach ($page->items as $news): ?>
+	<?php echo $news->name ?>
+	<?php echo $news->message ?>
+<?php endforeach; ?>
+
+
+
+<div class="row">
+	<div class="col-sm-1">
+		<p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
+			<?php echo $page->current, "/", $page->total_pages ?>
+		</p>
+	</div>
+	<div class="col-sm-11">
+		<nav>
+			<ul class="pagination">
+				<li><?php echo $this->tag->linkTo("users/search", "First") ?></li>
+				<li><?php echo $this->tag->linkTo("users/search?page=" . $page->before, "Previous") ?></li>
+				<li><?php echo $this->tag->linkTo("users/search?page=" . $page->next, "Next") ?></li>
+				<li><?php echo $this->tag->linkTo("users/search?page=" . $page->last, "Last") ?></li>
+			</ul>
+		</nav>
+	</div>
+</div>

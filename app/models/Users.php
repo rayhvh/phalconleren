@@ -17,23 +17,30 @@ class Users extends \Phalcon\Mvc\Model
     /**
      *
      * @var string
-     * @Column(type="string", length=255, nullable=false)
+     * @Column(type="string", length=45, nullable=false)
      */
     public $username;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=255, nullable=false)
+     * @Column(type="string", length=45, nullable=false)
+     */
+    public $email;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=45, nullable=false)
      */
     public $password;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=255, nullable=false)
+     * @Column(type="string", length=45, nullable=false)
      */
-    public $email;
+    public $rank;
 
     /**
      * Validations and business logic
@@ -56,6 +63,16 @@ class Users extends \Phalcon\Mvc\Model
         }
 
         return true;
+    }
+
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        $this->hasMany('id', 'Characters', 'users_id', ['alias' => 'Characters']);
+        $this->hasMany('id', 'News', 'users_id', ['alias' => 'News']);
+        $this->hasMany('id', 'UsersHasEvents', 'users_id', ['alias' => 'UsersHasEvents']);
     }
 
     /**
