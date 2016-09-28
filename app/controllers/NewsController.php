@@ -79,6 +79,9 @@ class NewsController extends ControllerBase
             'controller' => "news",
             'action' => 'index'
         ]);
+
+        $this->view->disable();    // omdat we geen view willen aanmaken die daadwerkelijk post.
+        $this->response->redirect(news);
     }
 }
 

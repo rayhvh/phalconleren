@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
 <div class="page-header">
 	<h1>
 		News
@@ -9,8 +11,21 @@
 </div>
 
 <?php foreach ($page->items as $news): ?>
-	<?php echo $news->name ?>
-	<?php echo $news->message ?>
+	<div class="title">
+		<?php echo ucfirst($news->name) ?> <!--Automaticly capitilizes first letter of string-->
+	</div>
+
+	<div class="message">
+		<?php echo ucfirst($news->message) ?> <!--Automaticly capitilizes first letter of string-->
+	</div>
+
+	<div class="creator">
+		Created by: <?php echo ucfirst($news->users_id) ?> <!--Automaticly capitilizes first letter of string-->
+	</div>
+
+	<div class="divider">
+
+	</div>
 <?php endforeach; ?>
 
 
@@ -24,10 +39,10 @@
 	<div class="col-sm-11">
 		<nav>
 			<ul class="pagination">
-				<li><?php echo $this->tag->linkTo("users/search", "First") ?></li>
-				<li><?php echo $this->tag->linkTo("users/search?page=" . $page->before, "Previous") ?></li>
-				<li><?php echo $this->tag->linkTo("users/search?page=" . $page->next, "Next") ?></li>
-				<li><?php echo $this->tag->linkTo("users/search?page=" . $page->last, "Last") ?></li>
+				<li><?php echo $this->tag->linkTo("news", "First") ?></li>
+				<li><?php echo $this->tag->linkTo("news?page=" . $page->before, "Previous") ?></li>
+				<li><?php echo $this->tag->linkTo("news?page=" . $page->next, "Next") ?></li>
+				<li><?php echo $this->tag->linkTo("news?page=" . $page->last, "Last") ?></li>
 			</ul>
 		</nav>
 	</div>
