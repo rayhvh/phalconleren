@@ -28,6 +28,13 @@ class News extends \Phalcon\Mvc\Model
 
     /**
      *
+     * @var string
+     * @Column(type="string", length=45, nullable=false)
+     */
+    public $status;
+
+    /**
+     *
      * @var integer
      * @Primary
      * @Column(type="integer", length=11, nullable=false)

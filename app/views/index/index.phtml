@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<div class="page-header">
+	<h1>
+		Home
+	</h1>
+<!--	Create if statement that only shows when logged in and admin+-->
+	<p>
+		The following pages exist:
+		<ul>
+		<li>
+			<?php echo $this->tag->linkTo(["news", "News"]) ?>
+		</li>
+		<li>
+			<?php echo $this->tag->linkTo(["users", "Users"]) ?>
+		</li>
+		</ul>
+	</p>
+</div>

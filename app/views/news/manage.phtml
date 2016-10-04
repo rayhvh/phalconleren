@@ -1,0 +1,75 @@
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<div class="page-header">
+	<h1>
+		News Management
+	</h1>
+	<!--	Create if statement that only shows when logged in and admin+-->
+	<p>
+		<?php echo $this->tag->linkTo(["news", "View live news"]) ?>
+	</p>
+</div>
+
+	<div class="row">
+		<table class="table table-bordered">
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Message</th>
+				<th>Created by</th>
+				<th>Status</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach ($page->items as $news): ?>
+				<tr>
+					<td><?php echo $news->id ?></td>
+					<td><?php echo $news->name ?></td>
+					<td><?php echo $news->message ?></td>
+					<td><?php echo $news->users->username ?></td>
+					<td>
+						<?php if($news->status == 0){
+							echo("Published");
+						}
+						else{
+							echo("Archived");
+						}
+						?>
+					</td>
+
+					<td>
+						<?php if($news->status == 0){
+							echo $this->tag->linkTo(["news/archive/" . $news->id, "Archive", "class" => "btn btn-info"]);
+						}
+						else{
+							echo $this->tag->linkTo(["news/publish/" . $news->id, "Publish", "class" => "btn btn-success"]);
+						}
+						?>
+						<?php echo $this->tag->linkTo(["news/delete/" . $news->id, "Delete", "class" => "btn btn-danger"]); ?>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+
+
+<div class="row">
+	<div class="col-sm-1">
+		<p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
+			<?php echo $page->current, "/", $page->total_pages ?>
+		</p>
+	</div>
+	<div class="col-sm-11">
+		<nav>
+			<ul class="pagination">
+				<li><?php echo $this->tag->linkTo("news", "First") ?></li>
+				<li><?php echo $this->tag->linkTo("news?page=" . $page->before, "Previous") ?></li>
+				<li><?php echo $this->tag->linkTo("news?page=" . $page->next, "Next") ?></li>
+				<li><?php echo $this->tag->linkTo("news?page=" . $page->last, "Last") ?></li>
+			</ul>
+		</nav>
+	</div>
+</div>

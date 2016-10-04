@@ -8,9 +8,14 @@
 	<p>
 		<?php echo $this->tag->linkTo(["news/new", "Create new post"]) ?>
 	</p>
+	<p>
+		<?php echo $this->tag->linkTo(["news/manage", "Manage news"]) ?>
+
+	</p>
 </div>
 
 <?php foreach ($page->items as $news): ?>
+
 	<div class="title">
 		<?php echo ucfirst($news->name) ?> <!--Automaticly capitilizes first letter of string-->
 	</div>
@@ -20,13 +25,16 @@
 	</div>
 
 	<div class="creator">
-		Created by: <?php echo ucfirst($news->users_id) ?> <!--Automaticly capitilizes first letter of string-->
+		Created by: <?php echo ucfirst($news->users->username) ?> <!--Automaticly capitilizes first letter of string-->
 	</div>
-
-	<div class="divider">
-
+	<div class="delete">
+		<?php echo $this->tag->linkTo(["news/delete/" . $news->id, "Delete", "class" => "btn btn-danger"]); ?>
 	</div>
-<?php endforeach; ?>
+	<div class="divider"></div>
+
+
+	<?php endforeach; ?>
+
 
 
 
