@@ -16,18 +16,7 @@ class NewsController extends ControllerBase
             $numberPage = $this->request->getQuery("page", "int");
         }
 
-        $news = News::find();
-
-        if (count($news) == 0) {
-            $this->flash->notice("There is currently no news");
-
-            $this->dispatcher->forward([
-                "controller" => "news",
-                "action" => "index"
-            ]);
-
-            return;
-        }
+        $news = News::find("status = '0'");
 
         $paginator = new Paginator([
             'data' => $news,
@@ -121,28 +110,75 @@ class NewsController extends ControllerBase
     public function deleteAction($id)
     {
         $news = News::findFirstByid($id);
-        if (!$news->delete()) {
+        if($news->status == 0) {
 
+            $this->flash->error("This needs to be archived first!");
+
+            $this->dispatcher->forward([
+                'controller' => "news",
+                'action' => 'manage'
+            ]);
+
+            return;
+        }
+
+        if (!$news->delete())
+        {
             foreach ($news->getMessages() as $message) {
                 $this->flash->error($message);
             }
 
             $this->dispatcher->forward([
                 'controller' => "news",
-                'action' => 'index'
+                'action' => 'manage'
             ]);
 
             return;
         }
 
-        $this->flash->success("news was deleted successfully");
+        $this->flash->success("News article '$news->name' is deleted!");
+
 
         $this->dispatcher->forward([
             'controller' => "news",
-            'action' => "index"
+            'action' => "manage"
         ]);
-        $this->view->disable();    // omdat we geen view willen aanmaken die daadwerkelijk post.
-        $this->response->redirect(news);
+
+    }
+
+    public function ArchiveAction($id)
+    {
+        $news = News::findFirstByid($id);
+
+        if($news->status == 0) {
+            $news->status = 1;
+            $this->flash->notice("News article '$news->name' is archived");
+        } else {
+            $news->status = 0;
+            $this->flash->success("News article '$news->name' is published!");
+
+        }
+
+
+        if (!$news->save())
+        {
+            foreach ($news->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "news",
+                'action' => 'manage'
+            ]);
+
+            return;
+        }
+
+        $this->dispatcher->forward([
+            'controller' => "news",
+            'action' => "manage"
+        ]);
+
     }
 
 }

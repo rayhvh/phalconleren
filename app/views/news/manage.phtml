@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
 <div class="page-header">
 	<h1>
 		News Management
@@ -9,6 +7,8 @@
 		<?php echo $this->tag->linkTo(["news", "View live news"]) ?>
 	</p>
 </div>
+
+<?php echo $this->getContent(); ?>
 
 	<div class="row">
 		<table class="table table-bordered">
@@ -44,7 +44,7 @@
 							echo $this->tag->linkTo(["news/archive/" . $news->id, "Archive", "class" => "btn btn-info"]);
 						}
 						else{
-							echo $this->tag->linkTo(["news/publish/" . $news->id, "Publish", "class" => "btn btn-success"]);
+							echo $this->tag->linkTo(["news/archive/" . $news->id, "Publish", "class" => "btn btn-success"]);
 						}
 						?>
 						<?php echo $this->tag->linkTo(["news/delete/" . $news->id, "Delete", "class" => "btn btn-danger"]); ?>
