@@ -40,12 +40,20 @@
 					</td>
 
 					<td>
-						<?php if($news->status == 0){
-							echo $this->tag->linkTo(["news/archive/" . $news->id, "Archive", "class" => "btn btn-info"]);
+
+
+						<?php
+						echo $this->tag->form("news/archive");
+						echo $this->tag->hiddenField(["id", "value" => $news->id]);
+						if($news->status == 0){
+							echo $this->tag->submitButton(["Archive", "class" => "btn btn-info"]);
+//							echo $this->tag->linkTo(["news/archive/" . $news->id, "Archive", "class" => "btn btn-info"]);
 						}
 						else{
-							echo $this->tag->linkTo(["news/archive/" . $news->id, "Publish", "class" => "btn btn-success"]);
+							echo $this->tag->submitButton(["Publish", "class" => "btn btn-success"]);
+//							echo $this->tag->linkTo(["news/archive/" . $news->id, "Publish", "class" => "btn btn-success"]);
 						}
+						echo $this->tag->endForm();
 						?>
 						<?php echo $this->tag->linkTo(["news/delete/" . $news->id, "Delete", "class" => "btn btn-danger"]); ?>
 					</td>

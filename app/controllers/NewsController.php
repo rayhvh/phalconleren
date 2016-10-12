@@ -146,8 +146,10 @@ class NewsController extends ControllerBase
 
     }
 
-    public function ArchiveAction($id)
+    public function ArchiveAction()
     {
+        $id = $this->request->getPost("id");
+
         $news = News::findFirstByid($id);
 
         if($news->status == 0) {

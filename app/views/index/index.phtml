@@ -5,6 +5,16 @@
 		Home
 	</h1>
 <!--	Create if statement that only shows when logged in and admin+-->
+
+	<?php echo $this->getContent(); ?>
+
+	<?php
+	$name = $this->session->get("name");
+	$rank = $this->session->get("rank");
+	echo $rank;
+	echo $name;
+	?>
+
 	<p>
 		Omdat er geen CSS nodig is of dat het er mooi uit moet zien kan
 		je lekker onderin overal via de footer navigeren.
