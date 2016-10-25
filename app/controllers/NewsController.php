@@ -9,6 +9,7 @@ class NewsController extends ControllerBase
 //    Show the index of news
     public function IndexAction()
     {
+
         $numberPage = 1;
         if ($this->request->isPost()) {
             $query = Criteria::fromInput($this->di, 'News', $_POST);
@@ -31,7 +32,7 @@ class NewsController extends ControllerBase
 
     public function NewAction()
     {
-
+        $this->handleSecurity('admin');
     }
 
     public function createAction()
@@ -78,6 +79,8 @@ class NewsController extends ControllerBase
 
     public function manageAction()
     {
+        $this->handleSecurity('admin');
+
         $numberPage = 1;
         if ($this->request->isPost()) {
             $query = Criteria::fromInput($this->di, 'News', $_POST);

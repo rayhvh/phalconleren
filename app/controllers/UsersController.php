@@ -59,7 +59,7 @@ class UsersController extends ControllerBase
      */
     public function newAction()
     {
-
+        $this->handleSecurity('admin');
     }
 
     /**
@@ -69,6 +69,8 @@ class UsersController extends ControllerBase
      */
     public function editAction($id)
     {
+        $this->handleSecurity('admin');
+
         if (!$this->request->isPost()) {
 
             $user = Users::findFirstByid($id);
@@ -99,6 +101,8 @@ class UsersController extends ControllerBase
      */
     public function createAction()
     {
+        $this->handleSecurity('admin');
+
         if (!$this->request->isPost()) {
             $this->dispatcher->forward([
                 'controller' => "users",
@@ -144,6 +148,8 @@ class UsersController extends ControllerBase
      */
     public function saveAction()
     {
+        $this->handleSecurity('admin');
+
 
         if (!$this->request->isPost()) {
             $this->dispatcher->forward([
@@ -204,6 +210,8 @@ class UsersController extends ControllerBase
      */
     public function deleteAction($id)
     {
+        $this->handleSecurity('admin');
+
         $user = Users::findFirstByid($id);
         if (!$user) {
             $this->flash->error("user was not found");

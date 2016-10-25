@@ -9,7 +9,11 @@
         Search users
     </h1>
     <p>
-        <?php echo $this->tag->linkTo(["users/new", "Create users"]) ?>
+        <?php $rank = $this->session->get("rank");
+        if ($rank == 'admin'):
+        echo $this->tag->linkTo(["users/new", "Create users"]);
+        endif; ?>
+
     </p>
 </div>
 

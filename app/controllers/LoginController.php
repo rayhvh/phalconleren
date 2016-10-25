@@ -8,12 +8,19 @@ class LoginController extends ControllerBase {
 
     public function indexAction()
     {
-
+        if ($this->session->has("username"))
+        {
+            $this->dispatcher->forward([
+                'controller' => "index",
+                'action' => "index"
+            ]);
+        }
     }
 
 
     public function loginAction()
     {
+
         $username = $this->request->getPost("username");
         $password = $this->request->getPost("password");
 
@@ -26,6 +33,7 @@ class LoginController extends ControllerBase {
 
                     $this->session->set("username", "$username");
                     $this->session->set("rank", "$user->rank");
+                    $this->session->set("user_id", "$user->id");
 
 
                     $this->dispatcher->forward([
@@ -50,5 +58,10 @@ class LoginController extends ControllerBase {
             ]);
         }
         // The validation has failed
+    }
+
+    public function logoutAction() {
+        $this->session->destroy();
+        $this->response->redirect('');
     }
 }

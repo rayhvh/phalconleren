@@ -1,0 +1,53 @@
+<div class="page-header">
+    <h1>
+        Create new character
+    </h1>
+    <p>
+        <?php echo $this->tag->linkTo(["characters", "Go back to overview"]) ?>
+    </p>
+</div>
+<?php echo $this->getContent(); ?>
+
+<?php
+echo $this->tag->form(
+    [
+        "characters/create",
+        "autocomplete" => "off",
+        "class" => "form-horizontal"
+    ]
+);
+?>
+
+<!--	Below-->
+<!--	Must be deleted when you can log in-->
+
+<div class="form-group">
+    <label for="fieldName" class="col-sm-2 control-label">Character name</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldUsers_id"]) ?>
+    </div>
+</div>
+
+<!--	Above must be deleted when you can log in-->
+
+<div class="form-group">
+    <label for="fieldName" class="col-sm-2 control-label">Class</label>
+    <div class="col-sm-3">
+        <?php echo $this->tag->textField(["class", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldMessage" class="col-sm-2 control-label">Specialisation</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->textField(["spec", "size" => 30, "class" => "form-control", "id" => "fieldMessage"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <?php echo $this->tag->submitButton(["Save", "class" => "btn btn-default"]) ?>
+    </div>
+</div>
+
+<?php echo $this->tag->endForm(); ?>

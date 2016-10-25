@@ -1,0 +1,64 @@
+<div class="page-header">
+	<h1>
+		Characters
+	</h1>
+	<!--	Create if statement that only shows when logged in and admin+-->
+	<p>
+		<?php echo $this->tag->linkTo(["characters/new", "Create new Character"]) ?>
+	</p>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<div class="row">
+	<table class="characters">
+		<tbody>
+		<?php foreach ($characters as $character):
+			$class = $character->class;
+		?>
+			<td>
+				<li><img src="img/<?= $class?>_Crest.png" alt="lol"></li>
+				<li><?php echo ucfirst($character->name) ?></li>
+				<li><?php echo ucfirst($character->spec) ?></li>
+			</td>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>
+
+<div class="row">
+	<table class="characters">
+		<tbody>
+		<td>
+			<li><img src="img/<?= $class?>_Crest.png" alt="lol"></li>
+			<li><?php echo $character->name ?></li>
+			<li><?php echo $character->spec ?></li>
+		</td>
+		<td>
+			<li><img src="img/<?= $class?>_Crest.png" alt="lol"></li>
+			<li><?php echo $character->name ?></li>
+			<li><?php echo $character->spec ?></li>
+		</td>
+		<td>
+			<li><img src="img/<?= $class?>_Crest.png" alt="lol"></li>
+			<li><?php echo $character->name ?></li>
+			<li><?php echo $character->spec ?></li>
+		</td>
+		<td>
+			<li><img src="img/<?= $class?>_Crest.png" alt="lol"></li>
+			<li><?php echo $character->name ?></li>
+			<li><?php echo $character->spec ?></li>
+		</td>
+		<td>
+			<li><img src="img/<?= $class?>_Crest.png" alt="lol"></li>
+			<li><?php echo $character->name ?></li>
+			<li><?php echo $character->spec ?></li>
+		</td>
+		<td>
+			<li><img src="img/<?= $class?>_Crest.png" alt="lol"></li>
+			<li><?php echo $character->name ?></li>
+			<li><?php echo $character->spec ?></li>
+		</td>
+		</tbody>
+	</table>
+</div>

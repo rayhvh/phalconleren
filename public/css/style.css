@@ -27,3 +27,19 @@ footer {
     text-align: center;
     font-size: 40px;
 }
+
+.characters td {
+    display: inline-block;
+    text-align: center;
+}
+
+.characters li {
+    list-style: none;
+    font-family: fantasy;
+    margin: 1px;
+}
+
+.characters .row {
+    width: 70%;
+    margin: 0 auto;
+}
