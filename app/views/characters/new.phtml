@@ -11,7 +11,7 @@
 <?php
 echo $this->tag->form(
     [
-        "characters/create",
+        "characters/confirm",
         "autocomplete" => "off",
         "class" => "form-horizontal"
     ]
@@ -31,16 +31,45 @@ echo $this->tag->form(
 <!--	Above must be deleted when you can log in-->
 
 <div class="form-group">
-    <label for="fieldName" class="col-sm-2 control-label">Class</label>
-    <div class="col-sm-3">
-        <?php echo $this->tag->textField(["class", "size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+    <label for="fieldRank" class="col-sm-2 control-label">Class</label>
+    <div class="col-sm-10">
+        <?php echo $this->tag->selectStatic(
+            [
+                "class",
+                [
+                    "DeathKnight" => "Death Knight",
+                    "DemonHunter" => "Demon Hunter",
+                    "Druid" => "Druid",
+                    "Hunter" => "Hunter",
+                    "Mage" => "Mage",
+                    "Monk" => "Monk",
+                    "Paladin" => "Paladin",
+                    "Priest" => "Priest",
+                    "Rogue" => "Rogue",
+                    "Shaman" => "Shaman",
+                    "Warlock" => "Warlock",
+                    "Warrior" => "Warrior",
+                ]
+            ]
+        );
+        ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="fieldMessage" class="col-sm-2 control-label">Specialisation</label>
+    <label for="fieldRank" class="col-sm-2 control-label">Role</label>
     <div class="col-sm-10">
-        <?php echo $this->tag->textField(["spec", "size" => 30, "class" => "form-control", "id" => "fieldMessage"]) ?>
+        <?php echo $this->tag->selectStatic(
+            [
+                "role",
+                [
+                    "Damage" => "Damage dealer",
+                    "Healer" => "Healer",
+                    "Tank" => "Tank",
+                ]
+            ]
+        );
+        ?>
     </div>
 </div>
 

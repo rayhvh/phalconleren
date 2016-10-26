@@ -1,6 +1,11 @@
 <?php
 
+use Phalcon\Validation\Validator\Uniqueness;
+use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation;
+
 class Characters extends \Phalcon\Mvc\Model
+
 {
 
     /**
@@ -51,6 +56,36 @@ class Characters extends \Phalcon\Mvc\Model
     /**
      * Initialize method for model.
      */
+
+    public function validation()
+    {
+        $validator = new Validation();
+
+        $validator-> add(
+            "name",
+            new Uniqueness(
+                [
+                    "field" => "name",
+                    "message" => "This character name already belongs to somebody!"
+                ]
+            )
+        );
+
+        $validator-> add(
+            "name",
+            new PresenceOf(
+                [
+                    "field" => "name",
+                    "message" => "Make sure you fill in a character!"
+                ]
+            )
+        );
+
+        return($this->validate($validator));
+
+    }
+
+
     public function initialize()
     {
         $this->belongsTo('users_id', 'Users', 'id', ['alias' => 'Users']);

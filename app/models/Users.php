@@ -1,6 +1,9 @@
 <?php
 
 use Phalcon\Mvc\Model\Validator\Email as Email;
+use Phalcon\Validation\Validator\Uniqueness;
+use Phalcon\Validation\Validator\PresenceOf;
+use Phalcon\Validation;
 
 class Users extends \Phalcon\Mvc\Model
 {
@@ -49,20 +52,51 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function validation()
     {
-//        $this->validate(
-//            new Email(
-//                [
-//                    'field'    => 'email',
-//                    'required' => true,
-//                ]
-//            )
-//        );
+        $validator = new Validation();
 
-        if ($this->validationHasFailed() == true) {
-            return false;
-        }
+        $validator-> add(
+            "username",
+        new Uniqueness(
+            [
+                "field" => "username",
+                "message" => "This username is already in use"
+            ]
+        )
+        );
 
-        return true;
+        $validator-> add(
+            "username",
+            new PresenceOf(
+                [
+                    "field" => "username",
+                    "message" => "Please fill in a username"
+                ]
+            )
+        );
+
+        $validator-> add(
+            "email",
+            new Uniqueness(
+                [
+                    "field" => "email",
+                    "message" => "This email is already in use"
+                ]
+            )
+        );
+
+        $validator-> add(
+            "email",
+            new PresenceOf(
+                [
+                    "field" => "email",
+                    "message" => "Please fill in an email"
+                ]
+            )
+        );
+
+
+        return($this->validate($validator));
+
     }
 
     /**
@@ -70,6 +104,10 @@ class Users extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
+        $this->setup(
+          ['notNullValidations' => false]
+        );
+
         $this->hasMany('id', 'Characters', 'users_id', ['alias' => 'Characters']);
         $this->hasMany('id', 'News', 'users_id', ['alias' => 'News']);
         $this->hasMany('id', 'UsersHasEvents', 'users_id', ['alias' => 'UsersHasEvents']);

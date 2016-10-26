@@ -26,6 +26,7 @@
 footer {
     text-align: center;
     font-size: 40px;
+    margin-top: 3%;
 }
 
 .characters td {
@@ -42,4 +43,30 @@ footer {
 .characters .row {
     width: 70%;
     margin: 0 auto;
+}
+
+.confirmchar {
+    margin: 0 auto;
+    margin-top: 5%;
+}
+
+.confirmchar td {
+    display: inline-block;
+    text-align: center;
+}
+
+.confirmchar li {
+    list-style: none;
+    font-family: fantasy;
+    margin: 1px;
+    font-size: 25px;
+}
+
+.confirmchar .row {
+    width: 70%;
+    margin: 0 auto;
+}
+
+img {
+    padding-bottom: 15px;
 }

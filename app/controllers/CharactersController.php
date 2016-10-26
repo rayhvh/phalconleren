@@ -48,6 +48,58 @@ class CharactersController extends ControllerBase
 
     public function ConfirmAction()
     {
+        $name  = $this->request->getPost("name");
+        $class = $this->request->getPost("class");
+        $role = $this->request->getPost("role");
+
+        $this->view->setVars(
+            [
+                "name" => $name,
+                "class"    => $class,
+                "role" => $role,
+            ]
+        );
+
+    }
+
+    public function CreateAction()
+    {
+
+        if (!$this->request->isPost()) {
+            $this->dispatcher->forward([
+                'controller' => "characters",
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $userid = $this->session->get("user_id");
+
+        $characters = new Characters();
+        $characters->name = $this->request->getPost("name");  // <---- must be deleted when you can log in!
+        $characters->class = $this->request->getPost("class");
+        $characters->spec = $this->request->getPost("role");
+        $characters->users_id = $userid;
+        $characters->main= 0;
+
+
+        if (!$characters->save()) {
+            foreach ($characters->getMessages() as $error) {
+                $this->flash->error($error);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "characters",
+                'action' => 'new'
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("character was created successfully");
+
+        $this->response->redirect('characters');
 
     }
 }
