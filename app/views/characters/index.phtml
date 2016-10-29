@@ -4,11 +4,24 @@
 	</h1>
 	<!--	Create if statement that only shows when logged in and admin+-->
 	<p>
-		<?php echo $this->tag->linkTo(["characters/new", "Create new Character"]) ?>
+		<i class="fa fa-plus" aria-hidden="true"></i> <?php echo $this->tag->linkTo(["characters/new", "Create new Character"]) ?>
 	</p>
 </div>
 
 <?php echo $this->getContent(); ?>
+
+<div class="btn-group" id="sort">
+	<a class="btn btn-default" href="#">
+		<i class="fa fa-sort-alpha-asc" title="Align Left"> Character name</i>
+	</a>
+	<a class="btn btn-default" href="#">
+		<i class="fa fa-align-center" title="Align Center"> Class</i>
+	</a>
+	<a class="btn btn-default" href="#">
+		<i class="fa fa-align-right" title="Align Right"> Role</i>
+	</a>
+</div>
+
 
 <div class="row">
 	<table class="characters">

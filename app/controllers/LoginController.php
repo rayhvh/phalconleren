@@ -25,26 +25,32 @@ class LoginController extends ControllerBase {
         $password = $this->request->getPost("password");
 
         $user = Users::findFirstByusername($username);
+
         if ($user) {
-                if ($password == $user->password) {
-//            if ($this->security->checkHash($password, $user->password)) {
+            $security = new Phalcon\Security();
+
+
+//                if ($password == $user->password) {
+            if ($security->checkHash($password, $user->password)) {
                 echo "password klopt";
                 $this->flash->success("Success!");
 
-                    $this->session->set("username", "$username");
-                    $this->session->set("rank", "$user->rank");
-                    $this->session->set("user_id", "$user->id");
+                $this->session->set("username", "$username");
+                $this->session->set("rank", "$user->rank");
+                $this->session->set("user_id", "$user->id");
 
 
-                    $this->dispatcher->forward([
+                $this->dispatcher->forward([
                     'controller' => "index",
                     'action' => "index"
                 ]);
+//            }
 
                 // The password is valid
             }
             else {
-                echo "password incorrect oid";
+//                echo "password incorrect oid";
+                echo $password;
             }
 
         } else {

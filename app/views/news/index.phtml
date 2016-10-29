@@ -9,10 +9,10 @@
 			if ($rank == 'admin' || $rank == 'moderator'):
 		?>
 	<p>
-		<?php echo $this->tag->linkTo(["news/new", "Create new post"]) ?>
+		<i class="fa fa-pencil-square-o" aria-hidden="true"></i> <?php echo $this->tag->linkTo(["news/new", "Create new post"]) ?>
 	</p>
 	<p>
-		<?php echo $this->tag->linkTo(["news/manage", "Manage news"]) ?>
+		<i class="fa fa-lock" aria-hidden="true"></i> <?php echo $this->tag->linkTo(["news/manage", "Manage news"]) ?>
 	</p>
 	<?php endif; ?>
 </div>

@@ -23,7 +23,6 @@ class CharactersController extends ControllerBase
            return;
        }
 
-//        $userid = $this->session->get("user_id");
         $characters = Characters::find("users_id = '" . $userid . "'");
 
 //        var_dump($characters);
@@ -33,8 +32,8 @@ class CharactersController extends ControllerBase
             $this->flash->notice("You do not have any characters");
 
             $this->dispatcher->forward([
-                "controller" => "news",
-                "action" => "index"
+                "controller" => "characters",
+                "action" => "new"
             ]);
 
             return;
@@ -43,11 +42,37 @@ class CharactersController extends ControllerBase
 
     public function NewAction()
     {
+        $userid = $this->session->get("user_id");
 
+        if (!isset($userid))
+        {
+            $this->dispatcher->forward([
+                "controller" => "index",
+                "action" => "index"
+            ]);
+
+            $this->flash->error("You do not have access to this page");
+
+            return;
+        }
     }
 
     public function ConfirmAction()
     {
+        $userid = $this->session->get("user_id");
+
+        if (!isset($userid))
+        {
+            $this->dispatcher->forward([
+                "controller" => "index",
+                "action" => "index"
+            ]);
+
+            $this->flash->error("You do not have access to this page");
+
+            return;
+        }
+
         $name  = $this->request->getPost("name");
         $class = $this->request->getPost("class");
         $role = $this->request->getPost("role");

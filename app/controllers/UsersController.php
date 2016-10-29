@@ -119,7 +119,7 @@ class UsersController extends ControllerBase
         $user->rank = $this->request->getPost("rank");
 
         // Store the password hashed
-//        $user->password = $this->security->hash($user->password);
+        $user->password = $this->security->hash($user->password);
 
         if (!$user->save()) {
             foreach ($user->getMessages() as $message) {

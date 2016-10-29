@@ -70,3 +70,15 @@ footer {
 img {
     padding-bottom: 15px;
 }
+
+.sort {
+    margin-bottom: 50px;
+}
+
+#sort {
+    margin-bottom: 30px;
+}
+
+a:hover {
+    opacity: 0.7;
+}
