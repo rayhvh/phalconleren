@@ -2,7 +2,9 @@
 	<h1>
 		News
 	</h1>
-<!--	Create if statement that only shows when logged in and admin+-->
+	<?php echo $this->getContent(); ?>
+
+	<!--	Create if statement that only shows when logged in and admin+-->
 <!--	--><?php //if (isset($secure) && $secure == true): ?>
 
 		<?php $rank = $this->session->get("rank");

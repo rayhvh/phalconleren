@@ -46,8 +46,10 @@ class NewsController extends ControllerBase
             return;
         }
 
+        $userid = $this->session->get("user_id");
+
         $news = new News();
-        $news->users_id = $this->request->getPost("users_id");  // <---- must be deleted when you can log in!
+        $news->users_id = $userid;
         $news->name = $this->request->getPost("name");
         $news->message = $this->request->getPost("message");
         $news->status = 0;
@@ -77,6 +79,11 @@ class NewsController extends ControllerBase
         $this->response->redirect(news);
     }
 
+
+
+
+
+
     public function manageAction()
     {
         $this->handleSecurity('admin');
@@ -88,10 +95,21 @@ class NewsController extends ControllerBase
             $numberPage = $this->request->getQuery("page", "int");
         }
 
-        $news = News::find();
+
+//        Query below
+        $filter  = $this->request->getPost("filter");
+
+        if(!isset($filter) || ($filter == 'All')) {
+            $news = News::find();
+        } else
+        {
+            $news = News::find("status = '$filter'");
+        }
+
+        //Till here
 
         if (count($news) == 0) {
-            $this->flash->notice("There is currently no news");
+            $this->flash->notice("There are no results for this filter!");
 
             $this->dispatcher->forward([
                 "controller" => "news",
@@ -109,6 +127,11 @@ class NewsController extends ControllerBase
 
         $this->view->page = $paginator->getPaginate();
     }
+
+
+
+
+
 
     public function deleteAction($id)
     {
@@ -148,6 +171,10 @@ class NewsController extends ControllerBase
         ]);
 
     }
+
+
+
+
 
     public function ArchiveAction()
     {

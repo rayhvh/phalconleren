@@ -10,19 +10,20 @@
 
 <?php echo $this->getContent(); ?>
 
-<div class="btn-group" id="sort">
-	<a class="btn btn-default" href="#">
-		<i class="fa fa-sort-alpha-asc" title="Align Left"> Character name</i>
-	</a>
-	<a class="btn btn-default" href="#">
-		<i class="fa fa-align-center" title="Align Center"> Class</i>
-	</a>
-	<a class="btn btn-default" href="#">
-		<i class="fa fa-align-right" title="Align Right"> Role</i>
-	</a>
+<!--Character main note-->
+<?php $chars = count($characters); ?>
+<div class="mainnote">
+	<p>
+		Currently you have <?php echo $chars ?> characters.
+	</p>
+	<?php if($chars >= 6) {
+		echo "It seems like you have over 5 characters. You can now select a main ";
+		echo $this->tag->linkTo(["characters/main", "here"]);
+	}
+	?>
 </div>
 
-
+<!--End of character main note-->
 <div class="row">
 	<table class="characters">
 		<tbody>
@@ -33,6 +34,7 @@
 				<li><img src="img/<?= $class?>_Crest.png" alt="lol"></li>
 				<li><?php echo ucfirst($character->name) ?></li>
 				<li><?php echo ucfirst($character->spec) ?></li>
+				<li><?php echo ucfirst($character->main) ?></li>
 			</td>
 		<?php endforeach; ?>
 		</tbody>

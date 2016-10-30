@@ -11,6 +11,8 @@ class UsersController extends ControllerBase
      */
     public function indexAction()
     {
+        $this->handleSecurity('admin');
+
         $this->persistent->parameters = null;
     }
 
@@ -19,6 +21,8 @@ class UsersController extends ControllerBase
      */
     public function searchAction()
     {
+        $this->handleSecurity('admin');
+
         $numberPage = 1;
         if ($this->request->isPost()) {
             $query = Criteria::fromInput($this->di, 'Users', $_POST);
@@ -59,7 +63,7 @@ class UsersController extends ControllerBase
      */
     public function newAction()
     {
-        $this->handleSecurity('admin');
+
     }
 
     /**
@@ -101,7 +105,6 @@ class UsersController extends ControllerBase
      */
     public function createAction()
     {
-        $this->handleSecurity('admin');
 
         if (!$this->request->isPost()) {
             $this->dispatcher->forward([

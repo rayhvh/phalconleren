@@ -10,6 +10,24 @@
 
 <?php echo $this->getContent(); ?>
 
+
+<?php echo $this->tag->form("news/manage"); ?>
+Filter:
+<?php echo $this->tag->selectStatic(
+	[
+		"filter",
+		[
+			"All" => "All",
+			"0" => "Published",
+			"1" => "Archived",
+		]
+	]
+);
+echo $this->tag->submitButton([">>"]);
+echo $this->tag->endForm();
+?>
+
+
 	<div class="row">
 		<table class="table table-bordered">
 			<thead>

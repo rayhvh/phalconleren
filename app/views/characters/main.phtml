@@ -1,0 +1,70 @@
+<div class="page-header">
+	<h1>
+		Set a main
+	</h1>
+	<!--	Create if statement that only shows when logged in and admin+-->
+	<p>
+		<i class="fa fa-arrow-left" aria-hidden="true"></i> <?php echo $this->tag->linkTo(["characters", "Back to characters"]) ?>
+	</p>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+	<?php foreach ($main as $mainchar):
+		$class = $mainchar->class;
+	?>
+		<div class="row">
+			<table class="confirmchar">
+				<tbody>
+				<td>
+					<li>
+						<img src="/prog2-1/img/<?= $class?>_Crest.png" alt="lol" style="opacity:0.2;margin-right:5px">
+						<img src="/prog2-1/img/<?= $class?>_Crest.png" alt="lol">
+						<img src="/prog2-1/img/<?= $class?>_Crest.png" alt="lol" style="opacity:0.2">
+					</li>
+					<div class="mainnote">
+						<p>
+							Your main is <?php echo ucfirst($mainchar->name) ?>
+						</p>
+					</div>
+				</td>
+				</tbody>
+			</table>
+		</div>
+	<?php endforeach; ?>
+
+
+	<div class="selectnewmain">
+		<p>
+			Type the name of the character you want to set as a main below.
+		</p>
+	</div>
+		<?php
+		echo $this->tag->form(
+			[
+				"characters/setmain",
+				"autocomplete" => "off",
+				"class" => "form-horizontal"
+			]
+		);
+		?>
+
+		<div class="form-group">
+			<label for="fieldName" class="col-sm-2 control-label">Character name</label>
+			<div class="col-sm-3">
+				<?php echo $this->tag->textField(["name", "size" => 30, "class" => "form-control", "id" => "fieldUsers_id"]) ?>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<?php echo $this->tag->submitButton(["Set as main!", "class" => "btn btn-default"]) ?>
+			</div>
+		</div>
+
+		<?php echo $this->tag->endForm(); ?>
+
+
+
+
+
+

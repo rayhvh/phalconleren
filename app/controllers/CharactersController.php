@@ -25,6 +25,18 @@ class CharactersController extends ControllerBase
 
         $characters = Characters::find("users_id = '" . $userid . "'");
 
+//        $filter  = $this->request->getPost("filter");
+//        $filter = 'druid';
+//
+//        $characters = Characters::find(array
+//        (
+//            "class = '$filter'",
+//            "users_id = '" . $userid . "'",
+////            'order'=> 'name ASC'
+////            'order'=> $filter
+//        ));
+
+
 //        var_dump($characters);
         $this->view->setVar('characters', $characters);
 
@@ -126,5 +138,68 @@ class CharactersController extends ControllerBase
 
         $this->response->redirect('characters');
 
+    }
+
+    public function MainAction() {
+        $userid = $this->session->get("user_id");
+        $characters = Characters::find("users_id = '" . $userid . "'");
+
+        $chars = count($characters);
+
+        if($chars < 5) {
+            $this->response->redirect('characters');
+            return;
+        }
+
+        $this->view->setVar('characters', $characters);
+
+
+        $main = Characters::find(array
+        (
+            "main = '1'",
+            "users_id = '" . $userid . "'",
+        ));
+
+        $this->view->setVar('main', $main);
+
+
+    }
+
+
+
+    public function setmainAction() {
+        $userid = $this->session->get("user_id");
+        $name = $this->request->getPost("name");
+
+        $characters = Characters::findFirst(array
+        (
+            "name = '$name'",
+            "users_id = '" . $userid . "'",
+        ));
+
+        if($characters->name === $name && ($characters->main == 0) ) {
+            $characters->main = 1;
+        } else {
+            $this->flash->error("Your character does not belong to you, does not exist or is already your main");
+        }
+
+        if (!$characters->save())
+        {
+            foreach ($characters->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => "characters",
+                'action' => 'main'
+            ]);
+
+            return;
+        }
+
+        $this->dispatcher->forward([
+            'controller' => "characters",
+            'action' => "main"
+        ]);
     }
 }

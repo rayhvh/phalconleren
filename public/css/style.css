@@ -82,3 +82,7 @@ img {
 a:hover {
     opacity: 0.7;
 }
+
+.mainnote {
+    text-align: center;
+}
